@@ -9,9 +9,9 @@ def main():
 
     dataset_params = {
         'name': 'DATA',
-        'data_root':'/mlcv/WorkingSpace/SceneText/namnh/scene_text_pipeline/Data/Data_Vietocr',
-        'train_annotation':'origin_augmented_synth20k_images_train.txt',
-        'valid_annotation':'origin_augmented_synth20k_images_test.txt'
+        'data_root':'./data',
+        'train_annotation':'train.txt',
+        'valid_annotation':'test.txt'
     }
 
     params = {
@@ -19,8 +19,8 @@ def main():
         'valid_every':2000,
         'iters':100000,
         'batch_size': 128,
-        #'checkpoint':'./weights/vgg_transformer_BKAI_VINTEXT_2500_IMGS_AUG.pth',    
-        'export':'./weights/VietOCR.pth',
+        #'checkpoint':'./weights/vietocr.pth',    
+        'export':'./weights/vietocr.pth',
         'metrics': 10000
     }
 
@@ -31,9 +31,9 @@ def main():
     trainer = Trainer(config, pretrained=False)
 
     #trainer.config.save('my_config/vgg_transformer.yml')
-    #trainer.load_checkpoint('./weights/vgg_transformer_BKAI_VINTEXT_2500_IMGS_AUG.pth')
+    #trainer.load_checkpoint('./weights/vietocr.pth')
     #print('Weight loading')
-    #trainer.load_weights('./weights/2500_IMGS_PERS_AUG_SYNTH20k_50kiter.pth')
+    #trainer.load_weights('./weights/vietocr.pth')
     print('Start training')
     trainer.train()
     print(trainer.precision())

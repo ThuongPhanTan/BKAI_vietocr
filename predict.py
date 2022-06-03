@@ -9,34 +9,20 @@ from tqdm import tqdm
 def parse_args():
     parser = argparse.ArgumentParser(description='Inference')
     parser.add_argument('--cfg_name', type=str, default = 'vgg_transformer',  help='Config file name')
-    parser.add_argument('--weights', default = './weights/vgg_transformer_no_pretrained.pth' ,type=str, help='Checkpoint file path')
-    parser.add_argument('--path_detect', type=str, default="../../Results/dict-guided", help='Path of results detector: txt file ')
+    parser.add_argument('--weights', default = './weights/vietocr.pth' ,type=str, help='Checkpoint file path')
+    parser.add_argument('--path_detect', type=str, default="./detect", help='Path of results detector: txt file ')
     parser.add_argument('--path_img', type=str, 
-                                        default = "/mlcv/Databases/BKAI/track3/dataset/Final",
+                                        default = "./data/image/demo",
                                         help='input image path of folder')
     parser.add_argument('--device', default="cuda:0") 
     parser.add_argument('--submission', type=int, default=0)                            
-    parser.add_argument('--path_output', type=str, default="../../Results/vietocr" , help='paht out of results')
-    # parser.add_argument('--det_name', type=str, default= "", help='name of version')
-    # parser.add_argument('--perspective', type=bool, default=True, help='prespcetive image')
-    # parser.add_argument('--gpus', type=str, default='0', help='target gpus')
+    parser.add_argument('--path_output', type=str, default="Results" , help='paht out of results')
     
     args = parser.parse_args()
     return args
 
 def main():
     args = parse_args()
-
-    # cfg_name = 'vgg_transformer'
-    # device = 'cuda:1'
-    # weights = './weights/vgg_transformer_no_pretrained.pth'
-    #path_detect = '/mlcv/WorkingSpace/SceneText/namnh/scene-text-pipeline/End-to-End/dict-guided/txt_output'
-    
-    
-    # path_detect = '/mlcv/WorkingSpace/SceneText/namnh/scene-text-pipeline/Recognize/vietocr/submission_dictguided_20K'
-    
-    # path_img = '/mlcv/Databases/BKAI/track3/dataset/public_test_img'
-    
     config = Cfg.load_config_from_name(args.cfg_name)
     config['vocab'] = 'aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ0123456789!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~° ' + '̉'+ '̀' + '̃'+ '́'+ '̣'
     config['device'] = args.device
